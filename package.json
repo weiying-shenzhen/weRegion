@@ -1,0 +1,36 @@
+{
+  "name": "we-region",
+  "version": "0.0.1",
+  "description": "select region",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "rollup -c -w",
+    "pro": "NODE_ENV=production rollup -c",
+    "build": "npm run pro",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weiying-shenzhen/weRegion.git"
+  },
+  "keywords": [
+    "canvas",
+    "select-region"
+  ],
+  "author": "zhengjunxin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/weiying-shenzhen/weRegion/issues"
+  },
+  "homepage": "https://github.com/weiying-shenzhen/weRegion#readme",
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-latest": "^6.24.1",
+    "eslint": "^4.1.1",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-watch": "^4.0.0"
+  }
+}

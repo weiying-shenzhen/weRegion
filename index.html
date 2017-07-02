@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .seats {
+            list-style-type: none;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .seat {
+            text-align: center;
+            line-height: 80px;
+            border: 1px solid #ccc;
+        }
+
+        .seat--hover {
+            background-color: #0099ff;
+        }
+    </style>
+    <title>WeRegion</title>
+</head>
+
+<body>
+    <ul class="seats">
+        <canvas class="mask"></canvas>
+    </ul>
+    <script src="dist/index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function (e) {
+            const $ = el => document.querySelector(el)
+            const $seats = $('.seats')
+            const fragment = document.createDocumentFragment()
+            const seatWidth = 80
+            const seatHeight = 80
+            const padding = 20
+            const seats = Array.from({ length: 10 }, (a, i) => ({
+                id: `seat${i}`,
+                pr: ~~(i / 5),
+                pc: i % 5,
+            }))
+
+            const getX = seat => seat.pc * (seatWidth + padding) + 200
+            const getY = seat => seat.pr * (seatHeight + padding) + 200
+
+            seats.forEach((seat, i) => {
+                const $li = document.createElement('li')
+                $li.className = 'seat'
+                $li.id = seat.id
+                $li.textContent = seat.id
+                $li.style.cssText = `width:${seatWidth}px;height:${seatHeight}px;position:absolute;top:${getY(seat)}px;left:${getX(seat)}px;`
+                fragment.appendChild($li)
+            })
+            $seats.appendChild(fragment)
+
+            // Usage of WeRegion
+            const weRegion = new WeRegion('.mask', {
+                move,
+                end,
+                zIndex: 10,
+            })
+
+            function move({ startX, startY, width, height }) {
+                seats.forEach(seat => {
+                    const $seat = $(`#${seat.id}`)
+                    const isCross = weRegion.isCross({
+                        x: getX(seat),
+                        y: getY(seat),
+                        w: seatWidth,
+                        h: seatHeight,
+                    })
+                    if (isCross) {
+                        $seat.classList.add('seat--hover')
+                    }
+                    else {
+                        $seat.classList.remove('seat--hover')
+                    }
+                })
+            }
+            function end({ startX, startY, width, height }) {
+                const selectedSeats = seats
+                    .filter(seat => {
+                        const $seat = $(`#${seat.id}`)
+                        return weRegion.isCross({
+                            x: getX(seat),
+                            y: getY(seat),
+                            w: seatWidth,
+                            h: seatHeight,
+                        })
+                    })
+                    .map(seat => seat.id)
+
+                alert(`${selectedSeats.join('，')} is selected`)
+            }
+        }, false)
+    </script>
+</body>
+
+</html>
