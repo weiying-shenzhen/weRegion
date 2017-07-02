@@ -73,7 +73,7 @@
             function move({ startX, startY, width, height }) {
                 seats.forEach(seat => {
                     const $seat = $(`#${seat.id}`)
-                    const isCross = weRegion.isCross({
+                    const isCross = weRegion.isRectCross({
                         x: getX(seat),
                         y: getY(seat),
                         w: seatWidth,
@@ -91,7 +91,7 @@
                 const selectedSeats = seats
                     .filter(seat => {
                         const $seat = $(`#${seat.id}`)
-                        return weRegion.isCross({
+                        return weRegion.isRectCross({
                             x: getX(seat),
                             y: getY(seat),
                             w: seatWidth,

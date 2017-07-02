@@ -1,13 +1,14 @@
 export default class WeRegion {
     constructor(el, options = {}) {
         const defaultOptions = {
-            className: '',
             width: 0,
             height: 0,
-            strokeStyle: '#0099FF',
-            fillStyle: 'rgba(195, 213, 237, 0.6)',
+            borderColor: '#0099FF',
+            bodyColor: 'rgba(195, 213, 237, 0.6)',
             lineDash: [4, 2],
             zIndex: 9527,
+            move: undefined,
+            end: undefined,
         }
         const canvas = typeof el === 'string' ? document.querySelector(el) : el
 
@@ -30,12 +31,12 @@ export default class WeRegion {
     }
     _initCanvas() {
         const { ctx, options } = this
-        const { fillStyle, strokeStyle, lineDash } = options
+        const { bodyColor, borderColor, lineDash } = options
 
         this._initCanvasSize()
 
-        ctx.fillStyle = fillStyle
-        ctx.strokeStyle = strokeStyle
+        ctx.fillStyle = bodyColor
+        ctx.strokeStyle = borderColor
         ctx.setLineDash(lineDash)
     }
     _initCanvasSize() {
@@ -95,7 +96,7 @@ export default class WeRegion {
                 height,
             })
         }
-        this._clear()
+        this.clear()
     }
     _onMouseLeave() {
         this._onMouseUp()
@@ -103,7 +104,7 @@ export default class WeRegion {
     _strokRect({ moveX, moveY }) {
         const { ctx, startX, startY } = this
 
-        this._clear()
+        this.clear()
 
         const width = this.width = moveX - startX
         const height = this.height = moveY - startY
@@ -120,12 +121,12 @@ export default class WeRegion {
             })
         }
     }
-    _clear() {
+    clear() {
         const { canvas, ctx } = this
 
         ctx.clearRect(0, 0, canvas.width, canvas.height)
     }
-    isCross({ x, y, w, h }) {
+    isRectCross({ x, y, w, h }) {
         const { startX, startY, width, height } = this
 
         const cx1 = w / 2 + x
