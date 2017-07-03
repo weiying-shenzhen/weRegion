@@ -62,8 +62,8 @@ export default class WeRegion {
     _onMouseDown(e) {
         this.hasMouseDown = true
         const { top, left } = this.canvasClientRect
-        const startX = this.startX = e.pageX - left
-        const startY = this.startY = e.pageY - top
+        const startX = this.startX = this.moveX = e.pageX - left
+        const startY = this.startY = this.moveY = e.pageY - top
 
         this._strokRect({
             startX,

@@ -15,23 +15,31 @@
             list-style-type: none;
             position: relative;
             width: 100vw;
-            height: 100vh;
+            height: 90vh;
         }
 
         .seat {
             text-align: center;
             line-height: 80px;
             border: 1px solid #ccc;
+            box-sizing: border-box;
         }
 
         .seat--hover {
             background-color: #0099ff;
+        }
+
+        .text {
+            height: 10vh;
+            line-height: 10vh;
+            text-align: center;
         }
     </style>
     <title>WeRegion</title>
 </head>
 
 <body>
+    <p class="text">Use mouse to select seats</p>
     <ul class="seats">
         <canvas class="mask"></canvas>
     </ul>
@@ -40,17 +48,20 @@
         document.addEventListener('DOMContentLoaded', function (e) {
             const $ = el => document.querySelector(el)
             const $seats = $('.seats')
+            const $text= $('.text')
             const fragment = document.createDocumentFragment()
             const seatWidth = 80
             const seatHeight = 80
             const padding = 20
-            const seats = Array.from({ length: 10 }, (a, i) => ({
+            const columns = 5
+            const length = 10
+            const seats = Array.from({ length }, (a, i) => ({
                 id: `seat${i}`,
-                pr: ~~(i / 5),
-                pc: i % 5,
+                pr: ~~(i / columns),
+                pc: i % columns,
             }))
 
-            const getX = seat => seat.pc * (seatWidth + padding) + 200
+            const getX = seat => seat.pc * (seatWidth + padding) + (window.innerWidth - (seatWidth + padding) * columns) / 2
             const getY = seat => seat.pr * (seatHeight + padding) + 200
 
             seats.forEach((seat, i) => {
@@ -100,7 +111,7 @@
                     })
                     .map(seat => seat.id)
 
-                alert(`${selectedSeats.join('，')} is selected`)
+                $text.textContent = `${selectedSeats.join('，')} is selected`
             }
         }, false)
     </script>
