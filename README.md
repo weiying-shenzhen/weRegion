@@ -4,7 +4,7 @@ weRegion 是一个可以不修改原逻辑，增加拉选框的功能的鼠标�
 
 ## 下载
 
-``` bash
+```
 $ npm install --save we-region
 ```
 或者
@@ -16,7 +16,7 @@ $ yarn add we-region
 
 通过传入 DOM 选择器使用
 
-``` javascript
+```
 import WeRegion from 'we-region'
 
 const weRegion = new WeRegion('.mask')
@@ -26,7 +26,7 @@ const weRegion = new WeRegion('.mask')
 
 weRegion 可以在实例化时，通过传入第二个参数进行配置
 
-``` javascript
+```
 const weRegion = new WeRegion('.mask', {
     borderColor: '#0099FF',
     bodyColor: 'rgba(195, 213, 237, 0.6)',
@@ -67,11 +67,11 @@ const weRegion = new WeRegion('.mask', {
 
 weRegion 提供 2 个实例方法
 
-### clear
+### `clear()`
 
 清除遮罩层中的拉选框
 
-### isRectCross({ x, y, w, h })
+### `isRectCross({ x, y, w, h })`
 
 检测给定矩形是否与拉选框相交。`x` 和 `y` 表示矩形的横坐标和纵坐标，`w` 和 `h` 表示矩形的宽和高
 

@@ -1,6 +1,6 @@
 {
   "name": "we-region",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "select region",
   "main": "dist/index.js",
   "scripts": {
