@@ -4,19 +4,19 @@ weRegion 是一个可以不修改原逻辑，增加拉选框的功能的鼠标�
 
 ## 下载
 
-```
-$ npm install --save we-region
+```bash
+npm install --save we-region
 ```
 或者
-```
-$ yarn add we-region
+```bash
+yarn add we-region
 ```
 
 ## 使用
 
 通过传入 DOM 选择器使用
 
-```
+```js
 import WeRegion from 'we-region'
 
 const weRegion = new WeRegion('.mask')
@@ -26,7 +26,7 @@ const weRegion = new WeRegion('.mask')
 
 weRegion 可以在实例化时，通过传入第二个参数进行配置
 
-```
+```js
 const weRegion = new WeRegion('.mask', {
     borderColor: '#0099FF',
     bodyColor: 'rgba(195, 213, 237, 0.6)',
