@@ -11,11 +11,17 @@
             padding: 0;
         }
 
+        body {
+            position: relative;
+        }
+
         .seats {
             list-style-type: none;
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100vw;
-            height: 90vh;
+            height: 100vh;
         }
 
         .seat {
@@ -48,7 +54,7 @@
         document.addEventListener('DOMContentLoaded', function (e) {
             const $ = el => document.querySelector(el)
             const $seats = $('.seats')
-            const $text= $('.text')
+            const $text = $('.text')
             const fragment = document.createDocumentFragment()
             const seatWidth = 80
             const seatHeight = 80
