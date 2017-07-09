@@ -1,3 +1,5 @@
+import { requestAnimationFrame } from 'raf-plus'
+
 export default class WeRegion {
     constructor(el, options = {}) {
         const defaultOptions = {
@@ -102,24 +104,26 @@ export default class WeRegion {
         this._onMouseUp()
     }
     _strokRect({ moveX, moveY }) {
-        const { ctx, startX, startY } = this
+        requestAnimationFrame(() => {
+            const { ctx, startX, startY } = this
 
-        this.clear()
+            this.clear()
 
-        const width = this.width = moveX - startX
-        const height = this.height = moveY - startY
+            const width = this.width = moveX - startX
+            const height = this.height = moveY - startY
 
-        ctx.strokeRect(startX, startY, width, height)
-        ctx.fillRect(startX, startY, width, height)
+            ctx.strokeRect(startX, startY, width, height)
+            ctx.fillRect(startX, startY, width, height)
 
-        if (typeof this.options.move === 'function') {
-            this.options.move({
-                startX,
-                startY,
-                width,
-                height,
-            })
-        }
+            if (typeof this.options.move === 'function') {
+                this.options.move({
+                    startX,
+                    startY,
+                    width,
+                    height,
+                })
+            }
+        })
     }
     clear() {
         const { canvas, ctx } = this
