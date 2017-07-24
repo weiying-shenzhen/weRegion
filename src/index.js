@@ -132,17 +132,29 @@ export default class WeRegion {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height)
     }
-    isRectCross({ x, y, w, h }) {
-        const { startX, startY, width, height } = this
+    isRectCross(rect1, rect2) {
+        if (!rect2) {
+            const { startX, startY, width, height } = this
 
-        const cx1 = w / 2 + x
-        const cy1 = h / 2 + y
+            rect2 = {
+                x: startX,
+                y: startY,
+                width,
+                height,
+            }
+        }
 
-        const cx2 = width / 2 + startX
-        const cy2 = height / 2 + startY
+        const { x: x1, y: y1, width: width1, height: height1 } = rect1
+        const { x: x2, y: y2, width: width2, height: height2 } = rect2
+        
+        const cx1 = width1 / 2 + x1
+        const cy1 = height1 / 2 + y1
 
-        const isXCross = Math.abs(cx2 - cx1) <= w / 2 + Math.abs(width / 2)
-        const isYCross = Math.abs(cy2 - cy1) <= h / 2 + Math.abs(height / 2)
+        const cx2 = width2 / 2 + x2
+        const cy2 = height2 / 2 + y2
+
+        const isXCross = Math.abs(cx2 - cx1) <= Math.abs(width1 / 2) + Math.abs(width2 / 2)
+        const isYCross = Math.abs(cy2 - cy1) <= Math.abs(height1 / 2) + Math.abs(height2 / 2)
 
         return isXCross && isYCross
     }

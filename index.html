@@ -93,8 +93,8 @@
                     const isCross = weRegion.isRectCross({
                         x: getX(seat),
                         y: getY(seat),
-                        w: seatWidth,
-                        h: seatHeight,
+                        width: seatWidth,
+                        height: seatHeight,
                     })
                     if (isCross) {
                         $seat.classList.add('seat--hover')
@@ -111,8 +111,8 @@
                         return weRegion.isRectCross({
                             x: getX(seat),
                             y: getY(seat),
-                            w: seatWidth,
-                            h: seatHeight,
+                            width: seatWidth,
+                            height: seatHeight,
                         })
                     })
                     .map(seat => seat.id)

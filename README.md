@@ -71,9 +71,9 @@ weRegion 提供 2 个实例方法
 
 清除遮罩层中的拉选框
 
-### `isRectCross({ x, y, w, h })`
+### `isRectCross(rect1, rect2)`
 
-检测给定矩形是否与拉选框相交。`x` 和 `y` 表示矩形的横坐标和纵坐标，`w` 和 `h` 表示矩形的宽和高
+检测给定矩形 rect1 与 rect2 是否相交。rect1 和 rect2 的签名均为 `{ x, y, width, height }`，其中 `x` 和 `y` 表示矩形的横坐标和纵坐标，`width` 和 `height` 表示矩形的宽和高。若 rect2 省略，则默认为当前拉选框的坐标和宽高
 
 ## Licence
 
