@@ -25,7 +25,8 @@ export default class WeRegion {
             options: Object.assign({}, defaultOptions, options, {
                 width: parseFloat(options.width) || canvas.parentNode.clientWidth,
                 height: parseFloat(options.height) || canvas.parentNode.clientHeight,
-            })
+            }),
+            hasMouseDown: false,
         })
 
         this._initCanvas()
@@ -63,9 +64,10 @@ export default class WeRegion {
     }
     _onMouseDown(e) {
         this.hasMouseDown = true
+        this.canvasClientRect = this.canvas.getBoundingClientRect()
         const { top, left } = this.canvasClientRect
-        const startX = this.startX = this.moveX = e.pageX - left
-        const startY = this.startY = this.moveY = e.pageY - top
+        const startX = this.startX = this.moveX = e.clientX - left
+        const startY = this.startY = this.moveY = e.clientY - top
 
         this._strokRect({
             startX,
@@ -75,8 +77,8 @@ export default class WeRegion {
     _onMouseMove(e) {
         if (!this.hasMouseDown) { return }
         const { top, left } = this.canvasClientRect
-        const moveX = this.moveX = e.pageX - left
-        const moveY = this.moveY = e.pageY - top
+        const moveX = this.moveX = e.clientX - left
+        const moveY = this.moveY = e.clientY - top
         this._strokRect({
             moveX,
             moveY,
