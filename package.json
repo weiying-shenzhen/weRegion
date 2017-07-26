@@ -36,6 +36,6 @@
     "rollup-watch": "^4.0.0"
   },
   "dependencies": {
-    "raf-plus": "0.0.5"
+    "raf-plus": "0.0.9"
   }
 }
